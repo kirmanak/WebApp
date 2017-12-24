@@ -1,7 +1,12 @@
 package ru.ifmo.se.seventh;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.repository.query.spi.EvaluationContextExtension;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -10,11 +15,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final AuthService authService;
 
     @Autowired
-    public SecurityConfig(AuthService authService) {
+    public SecurityConfiguration(AuthService authService) {
         this.authService = authService;
     }
 
@@ -37,8 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .disable();
     }
 
+    @Override
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .userDetailsService(authService)
                 .passwordEncoder(Student.getPasswordEncoder());

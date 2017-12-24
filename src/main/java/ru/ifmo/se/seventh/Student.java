@@ -2,8 +2,10 @@ package ru.ifmo.se.seventh;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,12 +14,15 @@ import javax.persistence.Id;
 @Data
 public class Student {
     private static final BCryptPasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
-    private @Id @GeneratedValue Long id;
+    private @Id @GeneratedValue @Getter
+    Long id;
+    @Column(unique = true)
     private String username;
     private @JsonIgnore String password;
     private String[] roles;
 
-    private Student() {}
+    @SuppressWarnings("unused")
+    public Student() {}
 
     public Student(final String username, final String password, final String ... roles) {
         this.roles = roles;

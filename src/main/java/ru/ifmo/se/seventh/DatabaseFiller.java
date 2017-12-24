@@ -20,8 +20,12 @@ public class DatabaseFiller implements CommandLineRunner {
     public void run(final String... args) throws Exception {
         final Student admin = new Student("admin", "admin", "STUDENT");
         studentRepository.save(admin);
-        final Point testPoint = new Point(1.5, -1.2, 2);
+        final Student kirill = new Student("kirill", "kirill", "STUDENT");
+        studentRepository.save(kirill);
+        final Point testPoint = new Point(1.5, -1.2, 2, admin);
         pointRepository.save(testPoint);
+        final Point secondPoint = new Point(-1.5, 1.2, 5, kirill);
+        pointRepository.save(secondPoint);
     }
 
 }

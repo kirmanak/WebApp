@@ -1,23 +1,28 @@
 package ru.ifmo.se.seventh;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Data
 @Entity
 public class Point {
-    private @Id @GeneratedValue Long id;
+    private @JsonIgnore @Id @GeneratedValue Long id;
     private double x;
     private double y;
     private int r;
     private boolean isInside;
+    private @JsonIgnore @ManyToOne Student owner;
 
-    private Point () {}
+    @SuppressWarnings("unused")
+    public Point () {}
 
-    public Point (final double x, final double y, final int r) {
+    public Point (final double x, final double y, final int r, final Student owner) {
+        this.owner = owner;
         this.x = x;
         this.y = y;
         this.r = r;
