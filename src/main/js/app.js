@@ -21,11 +21,11 @@ class App extends React.Component {
         super(props);
         this.state = {points: [], attributes: [], pageSize: initialPageSize, links: {}};
         this.state.r = 2;
-		    this.updatePageSize = this.updatePageSize.bind(this);
-		    this.onCreate = this.onCreate.bind(this);
-		    this.onDelete = this.onDelete.bind(this);
-		    this.onNavigate = this.onNavigate.bind(this);
-		    this.handleClick = this.handleClick .bind(this);
+        this.updatePageSize = this.updatePageSize.bind(this);
+        this.onCreate = this.onCreate.bind(this);
+        this.onDelete = this.onDelete.bind(this);
+        this.onNavigate = this.onNavigate.bind(this);
+        this.handleClick = this.handleClick .bind(this);
         this.changeRadius = this.changeRadius.bind(this);
     }
 

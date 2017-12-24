@@ -3,6 +3,7 @@ package ru.ifmo.se.seventh;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Column;
@@ -14,8 +15,7 @@ import javax.persistence.Id;
 @Data
 public class Student {
     private static final BCryptPasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
-    private @Id @GeneratedValue @Getter
-    Long id;
+    private @Id @GeneratedValue @Getter Long id;
     @Column(unique = true)
     private String username;
     private @JsonIgnore String password;
