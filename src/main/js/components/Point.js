@@ -20,7 +20,7 @@ const Button = Belle.Button;
                 <td>{this.props.point.x.toFixed(2)}</td>
                 <td>{this.props.point.y.toFixed(2)}</td>
                 <td>{this.props.point.r}</td>
-                <td>{this.props.point.inhere ? 'Принадлежит':'Не принадлежит'}</td>
+                <td>{this.props.point.inside ? 'Принадлежит':'Не принадлежит'}</td>
                 <td>
                     <Button onClick={this.handleDelete}>Удалить</Button>
                 </td>

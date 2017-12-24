@@ -63,13 +63,6 @@ class App extends React.Component {
     }
 
     onCreate(newPoint) {
-        const x = newPoint['x'],
-              y = newPoint['y'],
-              r = newPoint['r'];
-        newPoint['inhere'] = ((x >= -r) && (x <= 0) && (y <= r/2) && (y >= 0)) // rectangle
-          || ((x <= 0) && (y <= 0) && (x*x + y*y <= r*r/4)) // circle
-          || ((x >= 0) && (y <= 0) && (x - y*2 <= r));  // triangle
-
         follow(client, root, ['points']).then(pointsCollection => {
             return client({
                 method: 'POST',

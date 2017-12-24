@@ -17,10 +17,10 @@ public class DatabaseFiller implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... strings) throws Exception {
+    public void run(final String... args) throws Exception {
         final Student admin = new Student("admin", "admin", "STUDENT");
         studentRepository.save(admin);
-        final Point testPoint = new Point(1, -1, 2);
+        final Point testPoint = new Point(1.5, -1.2, 2);
         pointRepository.save(testPoint);
     }
 

@@ -243,7 +243,7 @@ export default class Graph extends React.Component {
     componentDidUpdate() {
         this.clear();
         this.props.points.map(point => {
-            if (point.inhere == true) {
+            if (point.inside === true) {
                 this.drawPoint(point.x, point.y, 'green');
             } else {
                 this.drawPoint(point.x, point.y, 'red');
