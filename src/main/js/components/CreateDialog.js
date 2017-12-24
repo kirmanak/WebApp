@@ -1,9 +1,7 @@
 import InputNumber from 'rc-input-number';
 import React from 'react';
-import Belle from 'belle';
+import Belle, {Button} from 'belle';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
-
-const Button = Belle.Button;
 
 const xOptions = [
     {value:"-3", content:"X = -3"},
@@ -96,9 +94,9 @@ export default class CreateDialog extends React.Component {
 
         return (
             <div>
-                <button onClick={() =>  {
-                    this.location = "/logout"
-                }}>Выйти</button>
+                <Button onClick={() =>  {
+                    document.location = "/logout"
+                }}>Выйти</Button>
                 <form>
                     {inputs}
                 </form>

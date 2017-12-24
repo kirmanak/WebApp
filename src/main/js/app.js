@@ -12,8 +12,6 @@ import PointList from './components/PointList';
 import CreateDialog from './components/CreateDialog';
 import Graph from './components/Graph';
 
-const TextInput = Belle.TextInput;
-
 const initialPageSize = 3;
 const root = '/api';
 
