@@ -11,9 +11,5 @@ public interface StudentRepository extends Repository<Student, Long> {
 
     boolean existsByUsername(String username);
 
-    boolean existsById(String s);
-
-    Student findById(String s);
-
     Student save(Student user);
 }

@@ -3,54 +3,46 @@ package ru.ifmo.se.seventh;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.jws.soap.SOAPBinding;
-import javax.validation.Valid;
 
 @Controller
 public class LoginController {
+    private final StudentRepository studentRepository;
+
+    @Autowired
+    public LoginController(StudentRepository repository) {
+        this.studentRepository = repository;
+    }
 
     @RequestMapping(value = "/")
     public String index() {
         return "index";
     }
 
-    @Autowired
-    UserService userService;
-
-    @GetMapping(value = {"/login"})
-    public ModelAndView login() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login");
-        return modelAndView;
+    @GetMapping(value = "/login")
+    public String login() {
+        return "login";
     }
 
     @GetMapping(value = "/registration")
-    public ModelAndView registration() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("registration");
-        return modelAndView;
+    public String registration() {
+        return "registration";
     }
+
     @PostMapping(value = "/registration")
-    public String createNewUser(@Valid Student user, BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView();
-        boolean userExists = userService.existsByUsername(user.getUsername());
-        boolean sucessRegistration=false;
-        if (userExists) {
-            bindingResult.rejectValue("username", "error.user", "Пользователь с таким логином уже существует");
+    public String createNewUser(@RequestBody Student student,
+                                Model model) {
+        if (studentRepository.existsByUsername(student.getUsername())) {
+            model.addAttribute("error", true);
+            return "registration";
+        } else {
+            final Student newStudent = new Student(student.getUsername(),
+                    student.getPassword(), "STUDENT");
+            studentRepository.save(newStudent);
+            return "login";
         }
-        if (!bindingResult.hasErrors()) {
-            userService.save(user);
-            modelAndView.addObject("successMessage", "Вы успешно зарегистрировались");
-            sucessRegistration=true;
-        }
-        if (sucessRegistration) {return "login";}
-        else {return "registration";}
     }
 }

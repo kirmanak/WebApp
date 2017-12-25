@@ -59,7 +59,7 @@ class App extends React.Component {
                 if (!this.state.pageState.last)
                     this.onNavigate(this.state.pageState.totalPages - 1);
         });
-	  }
+    }
 
     updatePageSize(pageSize) {
         this.state.pageState.size = pageSize;
