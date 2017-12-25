@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Set;
 
 @Entity
 @Data
@@ -29,6 +30,13 @@ public class Student {
         this.username = username;
         this.setPassword(password);
     }
+    public void setRoles(String[] roles) {
+        this.roles = new String[]{"STUDENT"};
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public static BCryptPasswordEncoder getPasswordEncoder() {
         return PASSWORD_ENCODER;
@@ -39,10 +47,15 @@ public class Student {
     }
 
     public String[] getRoles() {
-        return roles;
+                setRoles(roles);
+                return this.roles;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }
