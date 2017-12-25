@@ -27,12 +27,12 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping(value = "/registration")
+    @GetMapping(value = "/login/registration")
     public String registration() {
         return "registration";
     }
 
-    @PostMapping(value = "/registration")
+    @PostMapping(value = "/login/registration")
     public String createNewUser(@RequestBody Student student) {
         if (studentRepository.existsByUsername(student.getUsername())) {
             return "registration";
