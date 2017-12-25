@@ -38,9 +38,7 @@ public class LoginController {
         return modelAndView;
     }
     @PostMapping(value = "/registration")
-    public ModelAndView createNewUser(@Valid Student user, BindingResult bindingResult) {
-        System.out.println(user.getPassword());
-        System.out.println(user.getUsername());
+    public String createNewUser(@Valid Student user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         boolean userExists = userService.existsByUsername(user.getUsername());
         boolean sucessRegistration=false;
@@ -52,10 +50,7 @@ public class LoginController {
             modelAndView.addObject("successMessage", "Вы успешно зарегистрировались");
             sucessRegistration=true;
         }
-        if (sucessRegistration) {modelAndView.setViewName("login");}
-        else {;
-            modelAndView.setViewName("registration");};
-        System.out.println(modelAndView.getViewName());
-        return modelAndView;
+        if (sucessRegistration) {return "login";}
+        else {return "registration";}
     }
 }

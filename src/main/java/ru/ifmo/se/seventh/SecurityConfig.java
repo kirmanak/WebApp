@@ -12,19 +12,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-//    private final AuthService authService;
-//
-//    @Autowired
-//    public SecurityConfig(AuthService authService) {
-//        this.authService = authService;
-//    }
+    private final AuthService authService;
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.
-                jdbcAuthentication()
-                .usersByUsernameQuery("select username, password,  from users students username = ?");
+    @Autowired
+    public SecurityConfig(AuthService authService) {
+        this.authService = authService;
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -51,6 +45,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .anyRequest()
                 .authenticated();
+    }
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(authService)
+                .passwordEncoder(Student.getPasswordEncoder());
+
     }
 
 }
