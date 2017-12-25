@@ -34,8 +34,4 @@ public class ApiController {
         pointRepository.save(newPoint);
     }
 
-    @DeleteMapping("/points")
-    public void deletePoints(@RequestBody Long id) {
-        pointRepository.delete(pointRepository.findOne(id));
-    }
 }
