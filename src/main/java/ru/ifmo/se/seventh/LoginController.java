@@ -44,7 +44,7 @@ public class LoginController {
             System.out.println("Original password " + password);
             final Student newStudent = new Student(username,
                     password, "STUDENT");
-            System.out.println("New password " + password);
+            System.out.println("New password " + newStudent.getPassword());
             studentRepository.save(newStudent);
             return "redirect:/login";
         }
