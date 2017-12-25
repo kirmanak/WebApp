@@ -27,13 +27,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                /*
                 .csrf()
                 .disable()
                 .headers()
                 .addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
                 .and()
+                */
                 .authorizeRequests()
-                .antMatchers("/registration*")
+                .antMatchers("/registration", "/css")
                 .permitAll()
                 .and()
                 .formLogin()
@@ -44,7 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout")
+                .logoutSuccessUrl("/")
                 .permitAll()
                 .and()
                 .authorizeRequests()

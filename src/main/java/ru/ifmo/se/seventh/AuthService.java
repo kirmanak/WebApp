@@ -23,9 +23,6 @@ public class AuthService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(@NotNull String username) throws UsernameNotFoundException {
         Student student = studentRepository.findByUsername(username);
-        System.out.println(username);
-        System.out.println(student.getPassword());
-        System.out.println(Arrays.toString(student.getRoles()));
         if (student == null) throw new UsernameNotFoundException(username + " was not found!");
         return new User(username, student.getPassword(), AuthorityUtils.createAuthorityList(student.getRoles()));
     }

@@ -33,16 +33,14 @@ public class LoginController {
     }
 
     @PostMapping(value = "/registration")
-    public String createNewUser(@RequestBody Student student,
-                                Model model) {
+    public String createNewUser(@RequestBody Student student) {
         if (studentRepository.existsByUsername(student.getUsername())) {
-            model.addAttribute("error", true);
             return "registration";
         } else {
             final Student newStudent = new Student(student.getUsername(),
                     student.getPassword(), "STUDENT");
             studentRepository.save(newStudent);
-            return "login";
+            return "redirect:/";
         }
     }
 }
