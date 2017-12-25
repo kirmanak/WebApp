@@ -28,23 +28,22 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping(value = "/login/registration")
+    @GetMapping(value = "/registration")
     public String registration() {
         return "registration";
     }
 
-    @PostMapping(value = "/login/registration")
-    public RedirectView createNewUser(@RequestBody Student student) {
-        final RedirectView redirectView = new RedirectView();
-        redirectView.setContextRelative(true);
+    @PostMapping(value = "/registration")
+    public String createNewUser(@RequestBody Student student,
+                                Model model) {
         if (studentRepository.existsByUsername(student.getUsername())) {
-            redirectView.setUrl("/login/registration?error");
+            model.addAttribute("error");
+            return "redirect:/registration";
         } else {
             final Student newStudent = new Student(student.getUsername(),
                     student.getPassword(), "STUDENT");
             studentRepository.save(newStudent);
-            redirectView.setUrl("/");
+            return "redirect:/login";
         }
-        return redirectView;
     }
 }
