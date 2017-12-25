@@ -33,15 +33,17 @@ public class LoginController {
     }
 
     @PostMapping(value = "/registration")
-    public String createNewUser(@RequestBody Student student) {
-        if (studentRepository.existsByUsername(student.getUsername())) {
+    public String createNewUser(@RequestBody String username,
+                                @RequestBody String password) {
+        System.out.println("We are here!");
+        if (studentRepository.existsByUsername(username)) {
             System.out.println("Exists");
             return "registration";
         } else {
-            System.out.println("Original password " + student.getPassword());
-            final Student newStudent = new Student(student.getUsername(),
-                    student.getPassword(), "STUDENT");
-            System.out.println("New password " + student.getPassword());
+            System.out.println("Original password " + password);
+            final Student newStudent = new Student(username,
+                    password, "STUDENT");
+            System.out.println("New password " + password);
             studentRepository.save(newStudent);
             return "redirect:/login";
         }
