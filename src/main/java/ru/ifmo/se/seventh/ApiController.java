@@ -3,7 +3,6 @@ package ru.ifmo.se.seventh;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +23,7 @@ public class ApiController {
     public Page<Point> getPoints(@AuthenticationPrincipal User user,
                                  Pageable pageable) {
         final Student student = studentRepository.findByUsername(user.getUsername());
-        return pointRepository.findAllByOwner(pageable, student);
+        return pointRepository.findByOwner(pageable, student);
     }
 
     @PostMapping("/points")

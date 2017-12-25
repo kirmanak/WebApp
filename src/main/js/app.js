@@ -2,7 +2,6 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Belle from 'belle';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import client from './services/client';
@@ -33,25 +32,24 @@ class App extends React.Component {
         this.loadFromServer(this.state.pageSize);
     }
 
-	  loadFromServer(pageSize) {
-		  follow(client, root, [
-			  {rel: 'points', params: {size: pageSize}}]
-		  ).then(pointCollection => {
-			  return client({
-				  method: 'GET',
-				  path: pointCollection.entity._links.profile.href,
-				  headers: {'Accept': 'application/schema+json'}
-			  }).then(schema => {
+    loadFromServer(pageSize) {
+        follow(client, root, [
+            {rel: 'points', params: {size: pageSize}}]
+        ).then(pointCollection => {
+            return client({
+                method: 'GET',
+                path: pointCollection.entity._links.profile.href,
+                headers: {'Accept': 'application/schema+json'}}).then(schema => {
 				  this.schema = schema.entity;
 				  return pointCollection;
 			  });
-		  }).done(pointCollection => {
-			  this.setState({
-				  points: pointCollection.entity._embedded.points,
-				  attributes: Object.keys(this.schema.properties),
-				  pageSize: pageSize,
-				  links: pointCollection.entity._links});
-		  });
+        }).done(pointCollection => {
+            this.setState({
+                points: pointCollection.entity._embedded.points,
+                attributes: Object.keys(this.schema.properties),
+                pageSize: pageSize,
+                links: pointCollection.entity._links});
+        });
 	  }
 
     updatePageSize(pageSize) {
