@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class LoginController {
@@ -33,14 +34,17 @@ public class LoginController {
     }
 
     @PostMapping(value = "/login/registration")
-    public String createNewUser(@RequestBody Student student) {
+    public RedirectView createNewUser(@RequestBody Student student) {
+        final RedirectView redirectView = new RedirectView();
+        redirectView.setContextRelative(true);
         if (studentRepository.existsByUsername(student.getUsername())) {
-            return "redirect:/login/registration?error";
+            redirectView.setUrl("/login/registration?error");
         } else {
             final Student newStudent = new Student(student.getUsername(),
                     student.getPassword(), "STUDENT");
             studentRepository.save(newStudent);
-            return "redirect:/";
+            redirectView.setUrl("/");
         }
+        return redirectView;
     }
 }
