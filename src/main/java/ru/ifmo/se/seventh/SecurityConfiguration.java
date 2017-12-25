@@ -27,31 +27,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                /*
-                .csrf()
-                .disable()
-                .headers()
-                .addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
-                .and()
-                */
                 .authorizeRequests()
-                .antMatchers("/registration", "/css")
-                .permitAll()
-                .and()
+                    .anyRequest()
+                    .authenticated()
+                    .and()
+                .authorizeRequests()
+                    .antMatchers("/registration", "/css")
+                    .permitAll()
+                    .and()
                 .formLogin()
-                .defaultSuccessUrl("/")
-                .loginPage("/login")
-                .failureUrl("/login?error")
-                .permitAll()
-                .and()
+                    .loginPage("/login")
+                    .permitAll()
+                    .and()
                 .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-                .permitAll()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/")
                 .and()
-                .authorizeRequests()
-                .anyRequest()
-                .authenticated();
+                    .csrf()
+                    .disable();
     }
     
     @Override
