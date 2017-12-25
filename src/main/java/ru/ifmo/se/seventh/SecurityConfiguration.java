@@ -29,7 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers("/")
-                    .denyAll()
+                    .authenticated()
                     .and()
                 .formLogin()
                     .loginPage("/login")
