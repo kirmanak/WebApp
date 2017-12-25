@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class LoginController {
@@ -40,8 +39,10 @@ public class LoginController {
             model.addAttribute("error");
             return "redirect:/registration";
         } else {
+            System.out.println("Original password " + student.getPassword());
             final Student newStudent = new Student(student.getUsername(),
                     student.getPassword(), "STUDENT");
+            System.out.println("New password " + student.getPassword());
             studentRepository.save(newStudent);
             return "redirect:/login";
         }
