@@ -94,9 +94,6 @@ export default class CreateDialog extends React.Component {
 
         return (
             <div>
-                <Button onClick={() =>  {
-                    document.location = "/logout"
-                }}>Выйти</Button>
                 <form>
                     {inputs}
                 </form>

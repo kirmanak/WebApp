@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 @Data
 @Entity
 public class Point {
-    private @JsonIgnore @Id @GeneratedValue Long id;
+    private @Id @GeneratedValue Long id;
     private double x;
     private double y;
     private int r;

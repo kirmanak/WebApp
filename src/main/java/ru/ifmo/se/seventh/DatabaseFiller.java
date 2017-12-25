@@ -26,6 +26,8 @@ public class DatabaseFiller implements CommandLineRunner {
         pointRepository.save(testPoint);
         final Point secondPoint = new Point(-1.5, 1.2, 5, kirill);
         pointRepository.save(secondPoint);
+        final Point thirdPoint = new Point(2.2, -3.4, 4, kirill);
+        pointRepository.save(thirdPoint);
     }
 
 }

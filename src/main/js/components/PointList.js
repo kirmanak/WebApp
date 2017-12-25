@@ -4,8 +4,6 @@ import Point from './Point';
 import Belle from 'belle';
 const Button = Belle.Button;
 
-const initialPageSize = 3;
-
 export default class PointList extends React.Component{
 
     constructor(props) {
@@ -23,47 +21,41 @@ export default class PointList extends React.Component{
 
     handleNavFirst(e){
         e.preventDefault();
-        this.props.onNavigate(this.props.links.first.href);
+        this.props.onNavigate(0);
     }
 
     handleNavPrev(e) {
         e.preventDefault();
-        this.props.onNavigate(this.props.links.prev.href);
+        this.props.onNavigate(this.props.pageState.number - 1);
     }
 
     handleNavNext(e) {
         e.preventDefault();
-        this.props.onNavigate(this.props.links.next.href);
+        this.props.onNavigate(this.props.pageState.number + 1);
     }
 
     handleNavLast(e) {
         e.preventDefault();
-        this.props.onNavigate(this.props.links.last.href);
+        this.props.onNavigate(this.props.pageState.totalPages - 1);
     }
 
     render() {
         let points = this.props.points.map(point =>
-            <Point key={point._links.self.href} 
-                   attributes={this.props.attributes}
-                   onDelete={this.props.onDelete}
+            <Point key={point.id}
                    point={point}/>
         );
         let navLinks = [];
-        if ("first" in this.props.links) {
+        if (!this.props.pageState.first) {
             navLinks.push(<Button key="first" onClick={this.handleNavFirst}>&lt;&lt;</Button>);
-        }
-        if ("prev" in this.props.links) {
             navLinks.push(<Button key="prev" onClick={this.handleNavPrev}>&lt;</Button>);
         }
-        if ("next" in this.props.links) {
+        if (!this.props.pageState.last) {
             navLinks.push(<Button key="next" onClick={this.handleNavNext}>&gt;</Button>);
-        }
-        if ("last" in this.props.links) {
             navLinks.push(<Button key="last" onClick={this.handleNavLast}>&gt;&gt;</Button>);
         }
         return (
             <div>
-                Количество элементов на странице: <InputNumber onChange={this.handleInput} defaultValue={initialPageSize} min={1} max={10}/>
+                Количество элементов на странице: <InputNumber onChange={this.handleInput} defaultValue={this.props.pageState.size} min={1} max={5}/>
                 <table>
                     <tbody>
                     <tr>
