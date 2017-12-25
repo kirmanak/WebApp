@@ -33,7 +33,7 @@ public class LoginController {
     }
 
     @PostMapping(value = "/registration")
-    public String createNewUser(RegistrationRequest request) {
+    public String createNewUser(Student request) {
         final String username = request.getUsername(),
                 password = request.getPassword();
         System.out.println("We are here!");
