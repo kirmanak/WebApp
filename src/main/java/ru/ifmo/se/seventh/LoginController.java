@@ -33,8 +33,9 @@ public class LoginController {
     }
 
     @PostMapping(value = "/registration")
-    public String createNewUser(@RequestBody String username,
-                                @RequestBody String password) {
+    public String createNewUser(@RequestBody RegistrationRequest request) {
+        final String username = request.getUsername(),
+                password = request.getPassword();
         System.out.println("We are here!");
         if (studentRepository.existsByUsername(username)) {
             System.out.println("Exists");
