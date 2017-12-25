@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    window.onload = function () {
+        var info = document.URL+"";
+        if (info.indexOf("error")+1){
+            alert("invalid username or password")
+        }
+
+    }
+</script>
+<div style="width: 30%; margin-top: 10%; margin-left: 35%">
+    <form method="POST">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" aria-describedby="emailHelp"
+               placeholder="Username" name="username"/>
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else but FBI.</small>
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password" name="password"/>
+        <button type="submit" class="btn btn-primary" style="margin-top:20px;">Register it</button>
+        <p class="message swap">
+            Уже зарегистрированы? <a href="login">Войдите</a>
+        </p>
+    </form>
+</div>
+</body>
+</html>

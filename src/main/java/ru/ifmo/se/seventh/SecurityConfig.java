@@ -6,42 +6,51 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private final AuthService authService;
+//    private final AuthService authService;
+//
+//    @Autowired
+//    public SecurityConfig(AuthService authService) {
+//        this.authService = authService;
+//    }
 
-    @Autowired
-    public SecurityConfig(AuthService authService) {
-        this.authService = authService;
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.
+                jdbcAuthentication()
+                .usersByUsernameQuery("select username, password,  from users students username = ?");
     }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                    .anyRequest()
-                    .authenticated()
-                    .and()
-                .formLogin()
-                    .loginPage("/login")
-                    .permitAll()
-                    .and()
-                .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/")
-                    .and()
                 .csrf()
-                    .disable();
+                .disable()
+                .headers()
+                .addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
+                .and()
+                .authorizeRequests()
+                .antMatchers("/registration*")
+                .permitAll()
+                .and()
+                .formLogin()
+                .defaultSuccessUrl("/")
+                .loginPage("/login")
+                .failureUrl("/login?error")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+                .and()
+                .authorizeRequests()
+                .anyRequest()
+                .authenticated();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(authService)
-                .passwordEncoder(Student.getPasswordEncoder());
-
-    }
 }
