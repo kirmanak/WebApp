@@ -38,23 +38,26 @@ class App extends React.Component {
     }
 
     loadFromServer() {
-        axios
-            .get(root, {
-                params: {
-                    size: this.state.pageState.size,
-                    page: this.state.pageState.number
-                }
-            })
-            .then((response) => {
-                this.setState({
-                    points: response.data.content,
-                    pageState: {
-                        size: response.data.size,
-                        number: response.data.number,
-                        first: response.data.first,
-                        last: response.data.last,
-                        totalPages: response.data.totalPages
-                    },
+        return new Promise((resolve, reject) => {
+            axios
+                .get(root, {
+                    params: {
+                        size: this.state.pageState.size,
+                        page: this.state.pageState.number
+                    }
+                })
+                .then((response) => {
+                    this.setState({
+                        points: response.data.content,
+                        pageState: {
+                            size: response.data.size,
+                            number: response.data.number,
+                            first: response.data.first,
+                            last: response.data.last,
+                            totalPages: response.data.totalPages
+                        },
+                    });
+                    resolve();
                 });
         });
     }
@@ -66,7 +69,9 @@ class App extends React.Component {
 
     onCreate(newPoint) {
         axios.post(root, newPoint).then(() => {
-            this.loadFromServer();
+            this.loadFromServer().then(() => {
+                this.onNavigate(this.state.pageState.totalPages - 1);
+            });
         });
     }
 
