@@ -2,10 +2,8 @@ package ru.ifmo.se.seventh;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -33,18 +31,14 @@ public class LoginController {
     }
 
     @PostMapping(value = "/registration")
-    public String createNewUser(RegistrationRequest request) {
+    public String createNewUser(final RegistrationRequest request) {
         final String username = request.getUsername(),
                 password = request.getPassword();
-        System.out.println("We are here!");
         if (studentRepository.existsByUsername(username)) {
-            System.out.println("Exists");
             return "registration";
         } else {
-            System.out.println("Original password " + password);
             final Student newStudent = new Student(username,
                     password, "STUDENT");
-            System.out.println("New password " + newStudent.getPassword());
             studentRepository.save(newStudent);
             return "redirect:/login";
         }
