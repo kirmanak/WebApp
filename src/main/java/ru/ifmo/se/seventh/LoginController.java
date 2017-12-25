@@ -37,7 +37,7 @@ public class LoginController {
                                 Model model) {
         if (studentRepository.existsByUsername(student.getUsername())) {
             model.addAttribute("error");
-            return "redirect:/registration";
+            return "registration";
         } else {
             System.out.println("Original password " + student.getPassword());
             final Student newStudent = new Student(student.getUsername(),
