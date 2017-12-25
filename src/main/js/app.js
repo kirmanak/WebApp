@@ -56,8 +56,6 @@ class App extends React.Component {
                         totalPages: response.data.totalPages
                     },
                 });
-                if (!this.state.pageState.last)
-                    this.onNavigate(this.state.pageState.totalPages - 1);
         });
     }
 
