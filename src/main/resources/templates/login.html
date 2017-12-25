@@ -14,7 +14,7 @@
     }
 </script>
 <div style="width: 30%; margin-top: 10%; margin-left: 35%">
-    <form method="POST">
+    <form method="POST" action="/registration">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username" aria-describedby="emailHelp"
                    placeholder="Username" name="username"/>
@@ -22,11 +22,11 @@
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" placeholder="Password" name="password"/>
         <button type="submit" class="btn btn-primary" style="margin-top:20px;">Sign in</button>
-        <p class="message swap">
-            Ещё не зарегистрированы?
-            <a href="/registration">Создайте аккаунт</a>
-        </p>
     </form>
+    <p class="message swap">
+        Ещё не зарегистрированы?
+        <a href="/registration">Создайте аккаунт</a>
+    </p>
 </div>
 </body>
 </html>
