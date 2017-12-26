@@ -57,7 +57,7 @@ export default class PointList extends React.Component{
         return (
             <div>
                 Количество элементов на странице: <InputNumber onChange={this.handleInput} defaultValue={this.props.pageState.size} min={1} max={5}/>
-                <Table striped bordered hover width={this.props.width}>
+                <Table striped bordered hover>
                     <thead>
                     <tr>
                         <th>X</th>
