@@ -57,7 +57,7 @@ export default class CreateDialog extends React.Component {
                              onChange={(value) => {this.setState({yValue:value})}} />
             </label>,
             <Button key="submit" onClick={this.handleSubmit}>Проверить</Button>,
-            <FormGroup key='x' onChange={(value) => {this.setState({xValue: value});}}>
+            <FormGroup horizontal key='x' inputRef={value => this.setState({xValue: value})}>
                 {
                     xOptions.map((option, index) => {
                         return (
