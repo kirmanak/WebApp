@@ -58,7 +58,7 @@ export default class CreateDialog extends React.Component {
             </label>,
             <Button key="submit" onClick={this.handleSubmit}>Проверить</Button>,
             <ButtonToolbar key='x'>
-                <ToggleButtonGroup onChange={value => this.setState({xValue: value})} type="radio">
+                <ToggleButtonGroup name="xOptions" onChange={value => this.setState({xValue: value})} type="radio">
                     {
                         xOptions.map((option, index) =>
                                 <ToggleButton value={option.value} key={index}>
@@ -69,7 +69,7 @@ export default class CreateDialog extends React.Component {
                 </ToggleButtonGroup>
             </ButtonToolbar>,
             <ButtonToolbar key='r'>
-                <ToggleButtonGroup onChange={value => this.setState({rValue: value})} type="radio">
+                <ToggleButtonGroup name="rOptions" onChange={value => this.setState({rValue: value})} type="radio">
                     {
                         rOptions.map((option, index) =>
                             <ToggleButton value={option.value} key={index}>
