@@ -57,19 +57,29 @@ export default class CreateDialog extends React.Component {
                              onChange={(value) => {this.setState({yValue:value})}} />
             </label>,
             <Button key="submit" onClick={this.handleSubmit}>Проверить</Button>,
-            <ButtonToolbar>
-            <ToggleButtonGroup onChange={value => this.setState({xValue: value})} type="radio" name="xOptions" key='x'>
-                {
-                    xOptions.map((option, index) => {
-                        return (
+            <ButtonToolbar key='x'>
+                <ToggleButtonGroup onChange={value => this.setState({xValue: value})} type="radio">
+                    {
+                        xOptions.map((option, index) =>
+                                <ToggleButton value={option.value} key={index}>
+                                    {option.content}
+                                </ToggleButton>
+                        )
+                    }
+                </ToggleButtonGroup>
+            </ButtonToolbar>,
+            <ButtonToolbar key='r'>
+                <ToggleButtonGroup onChange={value => this.setState({rValue: value})} type="radio">
+                    {
+                        rOptions.map((option, index) =>
                             <ToggleButton value={option.value} key={index}>
                                 {option.content}
                             </ToggleButton>
-                        );
-                    })
-                }
-            </ToggleButtonGroup>
+                        )
+                    }
+                </ToggleButtonGroup>
             </ButtonToolbar>,
+            /*
             <RadioGroup horizontal key='r' onChange={(value) => {
                 this.setState({rValue: value});
                 this.props.changeRadius(value);
@@ -92,6 +102,7 @@ export default class CreateDialog extends React.Component {
                     })
                 }
             </RadioGroup>
+            */
         ];
 
         return (
