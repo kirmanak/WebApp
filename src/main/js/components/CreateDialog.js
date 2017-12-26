@@ -1,7 +1,8 @@
 import InputNumber from 'rc-input-number';
 import React from 'react';
-import Belle, {Button} from 'belle';
+import {Button} from 'belle';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
+import {FormGroup, Radio} from 'react-bootstrap';
 
 const xOptions = [
     {value:"-3", content:"X = -3"},
@@ -50,24 +51,23 @@ export default class CreateDialog extends React.Component {
     render() {
         let inputs = [
             <label key="y">
-                Y =
-                <InputNumber defaultValue={this.state.yValue}
+                Y = <InputNumber defaultValue={this.state.yValue}
                              min={-3}
                              max={5}
                              onChange={(value) => {this.setState({yValue:value})}} />
             </label>,
             <Button key="submit" onClick={this.handleSubmit}>Проверить</Button>,
-            <RadioGroup horizontal key='x' onChange={(value) => {this.setState({xValue: value});}}>
+            <FormGroup key='x' onChange={(value) => {this.setState({xValue: value});}}>
                 {
                     xOptions.map((option, index) => {
                         return (
-                            <RadioButton value={option.value} key={index}>
+                            <Radio value={option.value} key={index}>
                                 {option.content}
-                            </RadioButton>
+                            </Radio>
                         );
                     })
                 }
-            </RadioGroup>,
+            </FormGroup>,
             <RadioGroup horizontal key='r' onChange={(value) => {
                 this.setState({rValue: value});
                 this.props.changeRadius(value);
