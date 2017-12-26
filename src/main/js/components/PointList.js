@@ -57,7 +57,7 @@ export default class PointList extends React.Component{
         return (
             <div>
                 Количество элементов на странице: <InputNumber onChange={this.handleInput} defaultValue={this.props.pageState.size} min={1} max={5}/>
-                <table>
+                <Table>
                     <thead>
                     <tr>
                         <th>X</th>
@@ -69,7 +69,7 @@ export default class PointList extends React.Component{
                     <tbody>
                         {points}
                     </tbody>
-                </table>
+                </Table>
                 <div>
                     {navLinks}
                 </div>
