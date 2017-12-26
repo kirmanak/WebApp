@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="css/login.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
 </head>
 <body>
@@ -13,20 +14,21 @@
 
     }
 </script>
-<div style="width: 30%; margin-top: 10%; margin-left: 35%">
-    <form method="POST" action="/login">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" aria-describedby="emailHelp"
-                   placeholder="Username" name="username"/>
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else but FBI.</small>
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password" name="password"/>
-        <button type="submit" class="btn btn-primary" style="margin-top:20px;">Sign in</button>
+<div class = "container">
+<div class="wrapper">
+    <form method="POST" action="/login" class="form-signin" >
+        <h3 class="form-signin-heading">Привет, парень. Не хочешь войти ? ( ͡° ͜ʖ ͡°)</h3>
+        <hr class="colorgraph"><br>
+        <input type="text" class="form-control" id="username" aria-describedby="emailHelp"
+               placeholder="Username" name="username" required="" autofocus=""  />
+        <input type="password" class="form-control" id="password" placeholder="Password" name="password"  required="" />
+        <button type="submit"  class="btn btn-lg btn-primary btn-block" style="margin-top:20px;">Login</button>
+        <p class="message swap">
+            Нету аккаунта ? Не проблема
+            <a href="/registration">Завести аккаунт</a>
+        </p>
     </form>
-    <p class="message swap">
-        Ещё не зарегистрированы?
-        <a href="/registration">Создайте аккаунт</a>
-    </p>
+</div>
 </div>
 </body>
 </html>

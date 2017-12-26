@@ -1,12 +1,11 @@
 package ru.ifmo.se.seventh;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
@@ -16,7 +15,15 @@ public class LoginController {
     public LoginController(StudentRepository repository) {
         this.studentRepository = repository;
     }
-
+    @RequestMapping(value = "/regcheck", method = RequestMethod.GET)
+    public @ResponseBody Response getCharNum(@RequestParam String text) {
+        Response result = new Response();
+        if (text!=null) {
+            if (studentRepository.existsByUsername(text)) {result.setText("false");
+            } else result.setText("true");
+        }
+        return result;
+    }
     @RequestMapping(value = "/")
     public String index() {
         return "index";
@@ -36,18 +43,19 @@ public class LoginController {
         return new Student();
     }
     @PostMapping(value = "/registration")
-    public String createNewUser(final RegistrationRequest request, BindingResult bindingResult) {
+    public ModelAndView createNewUser(final RegistrationRequest request, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
         final String username = request.getUsername(),
                 password = request.getPassword();
         if (studentRepository.existsByUsername(username)) {
                 bindingResult.rejectValue("username", "error.user", "Пользователь с таким логином уже существует");
-            return "registration";
+            modelAndView.setViewName("registration");
         } else {
             final Student newStudent = new Student(username,
                     password, "STUDENT");
             studentRepository.save(newStudent);
-
-            return "redirect:/login";
+            modelAndView.setViewName("redirect:/login");
         }
+        return modelAndView;
     }
 }
