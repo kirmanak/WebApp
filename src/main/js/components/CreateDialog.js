@@ -2,7 +2,7 @@ import InputNumber from 'rc-input-number';
 import React from 'react';
 import {Button} from 'belle';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
-import {FormGroup, Radio} from 'react-bootstrap';
+import {ButtonToolbar, ToggleButton, ToggleButtonGroup} from 'react-bootstrap';
 
 const xOptions = [
     {value:"-3", content:"X = -3"},
@@ -57,18 +57,20 @@ export default class CreateDialog extends React.Component {
                              onChange={(value) => {this.setState({yValue:value})}} />
             </label>,
             <Button key="submit" onClick={this.handleSubmit}>Проверить</Button>,
-            <FormGroup key='x'>
+            <ButtonToolbar>
+            <ToggleButtonGroup type="radio" name="xOptions" key='x'>
                 {
                     xOptions.map((option, index) => {
                         return (
-                            <Radio inline inputRef={ref => {ref.onChange = event => this.setState({xValue: event.target.value})}}
-                                   name="x" value={option.value} key={index}>
+                            <ToggleButton onChange={value => this.setState({xValue: value})}
+                                   value={option.value} key={index}>
                                 {option.content}
-                            </Radio>
+                            </ToggleButton>
                         );
                     })
                 }
-            </FormGroup>,
+            </ToggleButtonGroup>
+            </ButtonToolbar>,
             <RadioGroup horizontal key='r' onChange={(value) => {
                 this.setState({rValue: value});
                 this.props.changeRadius(value);
