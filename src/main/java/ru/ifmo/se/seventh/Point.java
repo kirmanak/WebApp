@@ -34,7 +34,7 @@ public class Point {
     }
 
     public void setInside() {
-        isInside = ((x >= -r) && (x <= 0) && (y <= r/2) && (y >= 0)) // rectangle
+        isInside = ((x >= -r) && (x <= 0) && (y <= (double) r/2) && (y >= 0)) // rectangle
                 || ((x <= 0) && (y <= 0) && (x*x + y*y <= r*r/4)) // circle
                 || ((x >= 0) && (y <= 0) && (x - y*2 <= r));  // triangle
     }
