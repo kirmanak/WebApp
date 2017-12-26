@@ -1,7 +1,6 @@
 import InputNumber from 'rc-input-number';
 import React from 'react';
 import {Button} from 'belle';
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import {ButtonToolbar, ToggleButton, ToggleButtonGroup} from 'react-bootstrap';
 
 const xOptions = [

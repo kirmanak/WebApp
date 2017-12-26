@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import { Grid, Row, Col } from 'react-bootstrap';
 import PointList from './components/PointList';
 import CreateDialog from './components/CreateDialog';
 import Graph from './components/Graph';
@@ -106,12 +106,12 @@ class App extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs>
+                        <Col>
                             <Graph handleClick={this.handleClick} points={this.state.points}
                                     height={350} width={350} r={this.state.r}
                                     minX={-6} maxX={6} minY={-6} maxY={6} unitsPerTick={1} />
                         </Col>
-                        <Col xs>
+                        <Col>
                             <PointList points={this.state.points}
                                        pageState={this.state.pageState}
                                        onNavigate={this.onNavigate}
@@ -119,7 +119,7 @@ class App extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs>
+                        <Col>
                             <CreateDialog changeRadius={this.changeRadius}
                                           r={this.state.r}
                                           onCreate={this.onCreate}/>
