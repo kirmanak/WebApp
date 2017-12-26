@@ -74,7 +74,7 @@ export default class CreateDialog extends React.Component {
                 }} type="radio">
                     {
                         rOptions.map((option, index) => {
-                            if (option > 0) {
+                            if (option.value > 0) {
                                 return (
                                     <ToggleButton value={option.value} key={index}>
                                         {option.content}
