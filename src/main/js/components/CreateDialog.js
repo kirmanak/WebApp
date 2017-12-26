@@ -61,7 +61,7 @@ export default class CreateDialog extends React.Component {
                 {
                     xOptions.map((option, index) => {
                         return (
-                            <Radio inline inputRef={ref => {ref.onchange(value => this.setState({xValue: value}))}}
+                            <Radio inline inputRef={ref => {ref.onChange = event => this.setState({xValue: event.target.value})}}
                                    name="x" value={option.value} key={index}>
                                 {option.content}
                             </Radio>
