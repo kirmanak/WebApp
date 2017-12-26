@@ -69,13 +69,26 @@ export default class CreateDialog extends React.Component {
                 </ToggleButtonGroup>
             </ButtonToolbar>,
             <ButtonToolbar key='r'>
-                <ToggleButtonGroup name="rOptions" onChange={value => this.setState({rValue: value})} type="radio">
+                <ToggleButtonGroup name="rOptions" onChange={value => {
+                    this.setState({rValue: value}); this.props.changeRadius(value);
+                }} type="radio">
                     {
-                        rOptions.map((option, index) =>
-                            <ToggleButton value={option.value} key={index}>
-                                {option.content}
-                            </ToggleButton>
-                        )
+                        rOptions.map((option, index) => {
+                            if (option > 0) {
+                                return (
+                                    <ToggleButton value={option.value} key={index}>
+                                        {option.content}
+                                    </ToggleButton>
+                                )
+                            } else {
+                                return (
+                                    <ToggleButton disabled value={option.value} key={index}>
+                                        {option.content}
+                                    </ToggleButton>
+                                )
+
+                            }
+                        })
                     }
                 </ToggleButtonGroup>
             </ButtonToolbar>,
