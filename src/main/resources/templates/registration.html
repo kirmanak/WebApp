@@ -9,46 +9,52 @@
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 </head>
 <body>
+<script type="text/javascript">
+    function doAjax() {
+        var inputText = $("#username").val();
+        if (inputText!==null) {
+            return $.ajax({
+                url : 'regcheck',
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                mimeType: 'application/json',
+                data : ({
+                    text: inputText
+                }),
+                success: function (data) {
+                    var result;
+
+                    if (data.text==="true") {result='Ты успешно зареган';
+                    return true;
+
+                    }
+                    else if(data.text==="false") { result=' Кто-то занял никнейм '+inputText+'. Придумай другой';
+                    alert ("Кто-то занял никнейм "+inputText+" .Придумай другой");
+                    return false;
+                    }
+
+                }
+            });
+        }
+        alert($.ajax);
+    }
+</script>
 <div class = "container">
 
     <div class="wrapper">
-    <form method="POST" action="/registration" class="form-signin" >
+    <form method="POST" action="/registration" class="form-signin"  onsubmit="return doAjax()">
         <h3 class="form-signin-heading">Нету аккаунта ? Давай зарегестрируемся  ͡° ͜ʖ ͡°</h3>
         <hr class="colorgraph"><br>
         <input type="text" class="form-control" id="username" aria-describedby="emailHelp"
                placeholder="Username" name="username" required="" autofocus=""  />
         <input type="password" class="form-control" id="password" placeholder="Password" name="password"  required="" />
-        <button type="submit" onclick="doAjax()" class="btn btn-lg btn-primary btn-block" style="margin-top:20px;">Register</button>
-
+        <button type="submit"  class="btn btn-lg btn-primary btn-block" style="margin-top:20px;">Register</button>
         <p class="message swap">
-            Already registered?
-            <a href="/login">Login</a>
+            Уже зарегестрирован ?
+            <a href="/login">Войти</a>
         </p>
-        <script type="text/javascript">
-            function doAjax() {
 
-                var inputText = $("#username").val();
-                if (inputText!=null) {
-                $.ajax({
-                    url : 'regcheck',
-                    type: 'GET',
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    mimeType: 'application/json',
-                    data : ({
-                        text: inputText
-                    }),
-                    success: function (data) {
-                        let result;
-                        if (data.text==="true") {result='Ты успешно зареган'}
-                         else if(data.text==="false") { result=' Кто-то занял никнейм '+inputText+'. Придумай другой';
-                        }
-                        $("#result_text").text(result);
-                        if (data.text==="false") return false;
-                    }
-                });
-            }}
-        </script>
         <p id="result_text"></p>
     </form>
     </div>
