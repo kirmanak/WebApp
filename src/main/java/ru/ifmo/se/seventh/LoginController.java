@@ -46,6 +46,7 @@ public class LoginController {
             final Student newStudent = new Student(username,
                     password, "STUDENT");
             studentRepository.save(newStudent);
+
             return "redirect:/login";
         }
     }

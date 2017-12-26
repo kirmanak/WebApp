@@ -13,7 +13,7 @@
 <div class = "container">
 
     <div class="wrapper">
-    <form method="POST" action="/registration" class="form-signin" th:object="${student}">
+    <form method="POST" th:action="@{/registration}" class="form-signin" th:object="${student}">
         <h3 class="form-signin-heading">Welcome Back! Please Sign In</h3>
         <hr class="colorgraph"><br>
         <input type="text" class="form-control" id="username" aria-describedby="emailHelp"
@@ -27,8 +27,7 @@
 
         <div class="error-message" id="registration-error">
             <span th:errors="*{username}"><br></span>
-            <span th:errors="*{password}"><br></span>
-            <span th:utext="${successMessage}"></span>
+            <span th:errors="*{password}"><br></span>>
         </div>
     </form>
     </div>
