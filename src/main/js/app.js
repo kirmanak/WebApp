@@ -99,13 +99,13 @@ class App extends React.Component {
             <div>
                 <Grid fluid>
                     <Row className="show-grid">
-                        <Col xs={12}>
+                        <Col md={12}>
                             <Button onClick={() =>  {
                                 document.location = "/logout"
                             }}>Выйти</Button>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className="show-grid">
                         <Col md={6}>
                             <Graph handleClick={this.handleClick} points={this.state.points}
                                     height={350} width={350} r={this.state.r}
@@ -118,8 +118,8 @@ class App extends React.Component {
                                        updatePageSize={this.updatePageSize}/>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col xs={12}>
+                    <Row className="show-grid">
+                        <Col md={12}>
                             <CreateDialog changeRadius={this.changeRadius}
                                           r={this.state.r}
                                           onCreate={this.onCreate}/>
