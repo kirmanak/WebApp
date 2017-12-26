@@ -61,7 +61,7 @@ export default class CreateDialog extends React.Component {
                 {
                     xOptions.map((option, index) => {
                         return (
-                            <Radio value={option.value} key={index}>
+                            <Radio name="x" value={option.value} key={index}>
                                 {option.content}
                             </Radio>
                         );
