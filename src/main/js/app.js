@@ -99,19 +99,19 @@ class App extends React.Component {
             <div>
                 <Grid fluid>
                     <Row className="show-grid">
-                        <Col md={12}>
+                        <Col md={2}>
                             <Button onClick={() =>  {
                                 document.location = "/logout"
                             }}>Выйти</Button>
                         </Col>
                     </Row>
                     <Row className="show-grid">
-                        <Col md={6}>
+                        <Col md={1}>
                             <Graph handleClick={this.handleClick} points={this.state.points}
                                     height={350} width={350} r={this.state.r}
                                     minX={-6} maxX={6} minY={-6} maxY={6} unitsPerTick={1} />
                         </Col>
-                        <Col md={6}>
+                        <Col md={1}>
                             <PointList points={this.state.points}
                                        pageState={this.state.pageState}
                                        onNavigate={this.onNavigate}
@@ -119,7 +119,7 @@ class App extends React.Component {
                         </Col>
                     </Row>
                     <Row className="show-grid">
-                        <Col md={12}>
+                        <Col md={2}>
                             <CreateDialog changeRadius={this.changeRadius}
                                           r={this.state.r}
                                           onCreate={this.onCreate}/>
