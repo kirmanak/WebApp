@@ -11,6 +11,7 @@ import {Button} from 'belle';
 
 const initialPageSize = 3;
 const root = '/api/points';
+const graphAndTableWidth = 400;
 
 class App extends React.Component {
 
@@ -108,11 +109,12 @@ class App extends React.Component {
                     <Row className="show-grid">
                         <Col md={1}>
                             <Graph handleClick={this.handleClick} points={this.state.points}
-                                    height={350} width={350} r={this.state.r}
+                                    height={350} width={graphAndTableWidth} r={this.state.r}
                                     minX={-6} maxX={6} minY={-6} maxY={6} unitsPerTick={1} />
                         </Col>
                         <Col md={1}>
                             <PointList points={this.state.points}
+                                       width={graphAndTableWidth}
                                        pageState={this.state.pageState}
                                        onNavigate={this.onNavigate}
                                        updatePageSize={this.updatePageSize}/>
@@ -129,7 +131,7 @@ class App extends React.Component {
             </div>
         )
     }
-}
+};
 
 ReactDOM.render(
     <App />,
