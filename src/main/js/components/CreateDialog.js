@@ -57,11 +57,11 @@ export default class CreateDialog extends React.Component {
                              onChange={(value) => {this.setState({yValue:value})}} />
             </label>,
             <Button key="submit" onClick={this.handleSubmit}>Проверить</Button>,
-            <FormGroup horizontal key='x' inputRef={value => this.setState({xValue: value})}>
+            <FormGroup key='x'>
                 {
                     xOptions.map((option, index) => {
                         return (
-                            <Radio name="x" value={option.value} key={index}>
+                            <Radio inline inputRef={value => this.setState({xValue: value})} name="x" value={option.value} key={index}>
                                 {option.content}
                             </Radio>
                         );
