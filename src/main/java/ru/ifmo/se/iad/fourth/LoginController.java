@@ -1,4 +1,4 @@
-package ru.ifmo.se.seventh;
+package ru.ifmo.se.iad.fourth;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package ru.ifmo.se.seventh;
+package ru.ifmo.se.iad.fourth;
 
 public class Response {
 	private String text;

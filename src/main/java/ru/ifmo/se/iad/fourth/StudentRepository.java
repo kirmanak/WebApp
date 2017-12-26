@@ -1,4 +1,4 @@
-package ru.ifmo.se.seventh;
+package ru.ifmo.se.iad.fourth;
 
 import org.springframework.data.repository.Repository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
