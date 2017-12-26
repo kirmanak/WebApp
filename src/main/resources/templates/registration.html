@@ -1,24 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Registration</title>
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 </head>
 <body>
-<div style="width: 30%; margin-top: 10%; margin-left: 35%">
-    <form method="POST" action="/registration">
-        <label for="username">Username</label>
+<div class = "container">
+
+    <div class="wrapper">
+    <form method="POST" action="/registration" class="form-signin" >
+        <h3 class="form-signin-heading">Нету аккаунта ? Давай зарегестрируемся  ͡° ͜ʖ ͡°</h3>
+        <hr class="colorgraph"><br>
         <input type="text" class="form-control" id="username" aria-describedby="emailHelp"
-               placeholder="Username" name="username"/>
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else but FBI.</small>
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Password" name="password"/>
-        <button type="submit" class="btn btn-primary" style="margin-top:20px;">Register</button>
+               placeholder="Username" name="username" required="" autofocus=""  />
+        <input type="password" class="form-control" id="password" placeholder="Password" name="password"  required="" />
+        <button type="submit" onclick="doAjax()" class="btn btn-lg btn-primary btn-block" style="margin-top:20px;">Register</button>
+
+        <p class="message swap">
+            Already registered?
+            <a href="/login">Login</a>
+        </p>
+        <script type="text/javascript">
+            function doAjax() {
+
+                var inputText = $("#username").val();
+                if (inputText!=null) {
+                $.ajax({
+                    url : 'regcheck',
+                    type: 'GET',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    mimeType: 'application/json',
+                    data : ({
+                        text: inputText
+                    }),
+                    success: function (data) {
+                        let result;
+                        if (data.text==="true") {result='Ты успешно зареган'}
+                         else if(data.text==="false") { result=' Кто-то занял никнейм '+inputText+'. Придумай другой';
+                        }
+                        $("#result_text").text(result);
+                        if (data.text==="false") return false;
+                    }
+                });
+            }}
+        </script>
+        <p id="result_text"></p>
     </form>
-    <p class="message swap">
-        Already registered?
-        <a href="/registration">Login</a>
-    </p>
+    </div>
 </div>
 </body>
 </html>
