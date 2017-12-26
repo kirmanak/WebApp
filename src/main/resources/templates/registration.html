@@ -1,24 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Registration</title>
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 </head>
 <body>
-<div style="width: 30%; margin-top: 10%; margin-left: 35%">
-    <form method="POST" action="/registration">
-        <label for="username">Username</label>
+<div class = "container">
+
+    <div class="wrapper">
+    <form method="POST" action="/registration" class="form-signin" th:object="${student}">
+        <h3 class="form-signin-heading">Welcome Back! Please Sign In</h3>
+        <hr class="colorgraph"><br>
         <input type="text" class="form-control" id="username" aria-describedby="emailHelp"
-               placeholder="Username" name="username"/>
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else but FBI.</small>
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Password" name="password"/>
-        <button type="submit" class="btn btn-primary" style="margin-top:20px;">Register</button>
+               placeholder="Username" name="username" required="" autofocus="" th:field="*{username}" />
+        <input type="password" class="form-control" id="password" placeholder="Password" name="password"  required="" th:field="*{password}"/>
+        <button type="submit" class="btn btn-lg btn-primary btn-block" style="margin-top:20px;">Register</button>
+        <p class="message swap">
+            Already registered?
+            <a href="/login">Login</a>
+        </p>
+
+        <div class="error-message" id="registration-error">
+            <span th:errors="*{username}"><br></span>
+            <span th:errors="*{password}"><br></span>
+            <span th:utext="${successMessage}"></span>
+        </div>
     </form>
-    <p class="message swap">
-        Already registered?
-        <a href="/registration">Login</a>
-    </p>
+    </div>
 </div>
 </body>
 </html>
